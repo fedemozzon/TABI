@@ -403,7 +403,7 @@
       <type>WRITE_TO_LOG</type>
       <attributes/>
       <logmessage/>
-      <loglevel/>
+      <loglevel>Basic</loglevel>
       <logsubject/>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -419,7 +419,7 @@
       <to>Creación tabla de Dimensiones</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
