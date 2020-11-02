@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>creación tabla de dimensiones</name>
+    <name>creacion tabla de dimensiones</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -540,62 +540,62 @@
   </connection>
   <order>
     <hop>
-      <from>Dimensión Clasificación</from>
-      <to>Elimina campos de la dimensión clasificación</to>
+      <from>dimension_clasificaciones</from>
+      <to>elimina_campos_de_la_dimension_clasificaciones</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dimensión Sucursal</from>
-      <to>Elimina campos de la dimensión sucursal</to>
+      <from>dimension_sucursales</from>
+      <to>elimina_campos_de_la_dimension_sucursales</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dimensión Películas</from>
-      <to>Elimina campos de la dimensión película</to>
+      <from>dimension_peliculas</from>
+      <to>elimina_campos_de_la_dimension_pelicula</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Elimina campos de la dimensión película</from>
-      <to>pk_película</to>
+      <from>elimina_campos_de_la_dimension_pelicula</from>
+      <to>pk_pelicula</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Elimina campos de la dimensión sucursal</from>
+      <from>elimina_campos_de_la_dimension_sucursales</from>
       <to>pk_sucursal</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Elimina campos de la dimensión clasificación</from>
-      <to>pk_clasificación</to>
+      <from>elimina_campos_de_la_dimension_clasificaciones</from>
+      <to>pk_clasificacion</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dimensión Actores</from>
+      <from>dimension_actores</from>
       <to>pk_actor</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dimensión categorías</from>
-      <to>pk_categoría</to>
+      <from>dimension_categorias</from>
+      <to>pk_categoria</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Tabla Bridge</from>
-      <to>actualiza pk película</to>
+      <from>tabla_bridge</from>
+      <to>actualiza_pk_pelicula</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>actualiza pk película</from>
-      <to>actualiza pk categoría</to>
+      <from>actualiza_pk_pelicula</from>
+      <to>actualiza_pk_categorias</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>actualiza pk categoría</from>
-      <to>actualiza bridge_pelicula_categorías</to>
+      <from>actualiza_pk_categorias</from>
+      <to>actualiza_bridge_pelicula_categorias</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dimensión Tiempo</from>
+      <from>dimension_tiempo</from>
       <to>Valor JavaScript modificado</to>
       <enabled>Y</enabled>
     </hop>
@@ -606,7 +606,246 @@
     </hop>
   </order>
   <step>
-    <name>Dimensión Actores</name>
+    <name>Valor JavaScript modificado</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var semana = week(rental_date)
+var mes = month(rental_date) + 1
+var trimestre = quarter(rental_date)
+var semestre = (mes &lt; 6) ? 1 : 2
+var anio = year(rental_date)
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>semana</name>
+        <rename>semana</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>mes</name>
+        <rename>mes</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>trimestre</name>
+        <rename>trimestre</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>semestre</name>
+        <rename>semestre</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>anio</name>
+        <rename>anio</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_pk_pelicula</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dim_peliculas</table>
+    <connection>postgres dwh</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>film_id</name>
+        <lookup>film_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>pk_pelicula</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_bridge_pelicula_categorias</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres dwh</connection>
+    <schema>public</schema>
+    <table>dim_bridge_pelicula_categorias</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_pk_categorias</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dim_categoria</table>
+    <connection>postgres dwh</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>category_id</name>
+        <lookup>category_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>last_update</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>pk_categoria</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dimension_actores</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -735,7 +974,113 @@ FROM "public".actor
     </GUI>
   </step>
   <step>
-    <name>Dimensión Clasificación</name>
+    <name>dimension_categorias</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres</connection>
+    <sql>SELECT *
+FROM "public".category
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>category_id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Dimensión categorías</origin>
+        <comments>category_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>name</name>
+        <length>25</length>
+        <precision>-1</precision>
+        <origin>Dimensión categorías</origin>
+        <comments>name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_update</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Dimensión categorías</origin>
+        <comments>last_update</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dimension_clasificaciones</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1071,7 +1416,7 @@ FROM "public".film
     </GUI>
   </step>
   <step>
-    <name>Dimensión Películas</name>
+    <name>dimension_peliculas</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1407,7 +1752,7 @@ FROM "public".film
     </GUI>
   </step>
   <step>
-    <name>Dimensión Sucursal</name>
+    <name>dimension_sucursales</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1435,7 +1780,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>store_id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>store_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1458,7 +1803,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>manager_staff_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>manager_staff_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1481,7 +1826,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>address_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>address_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1504,7 +1849,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>last_update</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>last_update</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1527,7 +1872,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>address_id_1</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>address_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1550,7 +1895,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>address</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>address</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1573,7 +1918,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>address2</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>address2</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1596,7 +1941,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>district</name>
         <length>20</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>district</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1619,7 +1964,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>city_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>city_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1642,7 +1987,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>postal_code</name>
         <length>10</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>postal_code</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1665,7 +2010,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>phone</name>
         <length>20</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>phone</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1688,7 +2033,7 @@ inner join "public".address on store.address_id = address.address_id
         <name>last_update_1</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Sucursal</origin>
+        <origin>dimension_sucursal</origin>
         <comments>last_update</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1721,7 +2066,7 @@ inner join "public".address on store.address_id = address.address_id
     </GUI>
   </step>
   <step>
-    <name>Dimensión Tiempo</name>
+    <name>dimension_tiempo</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1919,113 +2264,7 @@ FROM "public".rental
     </GUI>
   </step>
   <step>
-    <name>Dimensión categorías</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres</connection>
-    <sql>SELECT *
-FROM "public".category
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>category_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Dimensión Clasificación 2</origin>
-        <comments>category_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>name</name>
-        <length>25</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación 2</origin>
-        <comments>name</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>last_update</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación 2</origin>
-        <comments>last_update</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Elimina campos de la dimensión clasificación</name>
+    <name>elimina_campos_de_la_dimension_clasificaciones</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2086,7 +2325,7 @@ FROM "public".category
     </GUI>
   </step>
   <step>
-    <name>Elimina campos de la dimensión película</name>
+    <name>elimina_campos_de_la_dimension_pelicula</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2123,7 +2362,7 @@ FROM "public".category
     </GUI>
   </step>
   <step>
-    <name>Elimina campos de la dimensión sucursal</name>
+    <name>elimina_campos_de_la_dimension_sucursales</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2166,351 +2405,6 @@ FROM "public".category
     </GUI>
   </step>
   <step>
-    <name>Tabla Bridge</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres</connection>
-    <sql>SELECT *
-FROM "public".film_category
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>film_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Entrada Tabla</origin>
-        <comments>film_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>category_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Entrada Tabla</origin>
-        <comments>category_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>last_update</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>Entrada Tabla</origin>
-        <comments>last_update</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Valor JavaScript modificado</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var semana = week(rental_date)
-var mes = month(rental_date) + 1
-var trimestre = quarter(rental_date)
-var semestre = (mes &lt; 6) ? 1 : 2
-var anio = year(rental_date)
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>semana</name>
-        <rename>semana</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>mes</name>
-        <rename>mes</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>trimestre</name>
-        <rename>trimestre</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>semestre</name>
-        <rename>semestre</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>anio</name>
-        <rename>anio</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza bridge_pelicula_categorías</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres dwh</connection>
-    <schema>public</schema>
-    <table>dim bridge_pelicula_categorías</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza pk categoría</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim categoría</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>category_id</name>
-        <lookup>category_id</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name>pk_categoría</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza pk película</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim peliculas</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>film_id</name>
-        <lookup>film_id</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name>pk_pelicula</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>pk_actor</name>
     <type>DimensionLookup</type>
     <description/>
@@ -2522,7 +2416,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim actores</table>
+    <table>dim_actores</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2578,7 +2472,7 @@ var anio = year(rental_date)
     </GUI>
   </step>
   <step>
-    <name>pk_categoría</name>
+    <name>pk_categoria</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2589,7 +2483,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim categoría</table>
+    <table>dim_categoria</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2614,7 +2508,7 @@ var anio = year(rental_date)
         <update>Update</update>
       </field>
       <return>
-        <name>pk_categoría</name>
+        <name>pk_categoria</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
@@ -2645,7 +2539,7 @@ var anio = year(rental_date)
     </GUI>
   </step>
   <step>
-    <name>pk_clasificación</name>
+    <name>pk_clasificacion</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2656,7 +2550,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim clasificación</table>
+    <table>dim_clasificacion</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2676,7 +2570,7 @@ var anio = year(rental_date)
         <update>Update</update>
       </field>
       <return>
-        <name>pk_clasificación</name>
+        <name>pk_clasificacion</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
@@ -2718,7 +2612,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim fecha</table>
+    <table>dim_fecha</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2789,7 +2683,7 @@ var anio = year(rental_date)
     </GUI>
   </step>
   <step>
-    <name>pk_película</name>
+    <name>pk_pelicula</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2800,7 +2694,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim peliculas</table>
+    <table>dim_peliculas</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2867,7 +2761,7 @@ var anio = year(rental_date)
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim sucursal</table>
+    <table>dim_sucursales</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2924,6 +2818,112 @@ var anio = year(rental_date)
     <GUI>
       <xloc>672</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>tabla_bridge</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres</connection>
+    <sql>SELECT *
+FROM "public".film_category
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>film_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Tabla Bridge</origin>
+        <comments>film_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>category_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Tabla Bridge</origin>
+        <comments>category_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_update</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Tabla Bridge</origin>
+        <comments>last_update</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

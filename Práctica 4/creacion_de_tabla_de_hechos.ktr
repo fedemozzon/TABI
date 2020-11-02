@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>creación de tabla de hechos</name>
+    <name>creacion_de_tabla_de_hechos</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -540,334 +540,46 @@
   </connection>
   <order>
     <hop>
-      <from>Creación de tabla de Hechos Alquiler</from>
+      <from>creacion_de_tabla_de_hechos_alquiler</from>
       <to>Renombra campo ganancias</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Renombra campo ganancias</from>
-      <to>pk_película</to>
+      <to>pk_pelicula</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Creación de tabla de Hechos Actuación</from>
-      <to>pk_película en actuación</to>
+      <from>creacion_de_tabla_de_hechos_actuacion</from>
+      <to>pk_pelicula en actuacion</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>pk_película</from>
+      <from>pk_pelicula</from>
       <to>pk_sucursal</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>pk_sucursal</from>
-      <to>pk_clasificación</to>
+      <to>pk_clasificacion</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>pk_clasificación</from>
-      <to>guardo alquiler</to>
+      <from>pk_clasificacion</from>
+      <to>guardo_alquiler</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>pk_película en actuación</from>
+      <from>pk_pelicula en actuacion</from>
       <to>pk_actores</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>pk_actores</from>
-      <to>guardo actuación</to>
+      <to>guardo_actuacion</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Creación de tabla de Hechos Actuación</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres</connection>
-    <sql>SELECT *
-FROM "public".film_actor</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>actor_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Creación de tabla de Hechos Actuación</origin>
-        <comments>actor_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>film_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Creación de tabla de Hechos Actuación</origin>
-        <comments>film_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>last_update</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>Creación de tabla de Hechos Actuación</origin>
-        <comments>last_update</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Creación de tabla de Hechos Alquiler</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres</connection>
-    <sql>SELECT
-  rental.rental_id
-, sum(amount)
-, rental_date
-, inventory.film_id
-, inventory.store_id
-, rental.last_update
-FROM "public".rental
-inner join "public".inventory on rental.inventory_id = inventory.inventory_id
-INNER join "public".payment  ON payment.rental_id = rental.rental_id
-GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>rental_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>rental_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>sum</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>sum</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>rental_date</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>rental_date</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>film_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>film_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>store_id</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>store_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>last_update</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>Creación de tabla de Hechos Alquiler</origin>
-        <comments>last_update</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Renombra campo ganancias</name>
     <type>SelectValues</type>
@@ -916,8 +628,8 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>guardo actuación</name>
-    <type>TableOutput</type>
+    <name>creacion_de_tabla_de_hechos_actuacion</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -926,25 +638,86 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>postgres dwh</connection>
-    <schema>public</schema>
-    <table>fact actuación</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
+    <connection>postgres</connection>
+    <sql>SELECT *
+FROM "public".film_actor</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>actor_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Creación de tabla de Hechos Actuacion</origin>
+        <comments>actor_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>film_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Creación de tabla de Hechos Actuacion</origin>
+        <comments>film_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_update</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Creación de tabla de Hechos Actuacion</origin>
+        <comments>last_update</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -954,13 +727,196 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>144</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>guardo alquiler</name>
+    <name>creacion_de_tabla_de_hechos_alquiler</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres</connection>
+    <sql>SELECT
+  rental.rental_id
+, sum(amount)
+, rental_date
+, inventory.film_id
+, inventory.store_id
+, rental.last_update
+FROM "public".rental
+inner join "public".inventory on rental.inventory_id = inventory.inventory_id
+INNER join "public".payment  ON payment.rental_id = rental.rental_id
+GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>rental_id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>rental_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>BigNumber</type>
+        <storagetype>normal</storagetype>
+        <name>sum</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>sum</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>rental_date</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>rental_date</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>film_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>film_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>store_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>store_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_update</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <comments>last_update</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>guardo_alquiler</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -972,7 +928,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </partitioning>
     <connection>postgres dwh</connection>
     <schema>public</schema>
-    <table>fact alquiler</table>
+    <table>fact_alquiler</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1004,6 +960,50 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
+    <name>guardo_actuacion</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres dwh</connection>
+    <schema>public</schema>
+    <table>fact_actuacion</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>pk_actores</name>
     <type>DimensionLookup</type>
     <description/>
@@ -1015,7 +1015,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim actores</table>
+    <table>dim_actores</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
@@ -1061,7 +1061,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>pk_clasificación</name>
+    <name>pk_clasificacion</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1072,14 +1072,14 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim clasificación</table>
+    <table>dim_clasificacion</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
     <fields>
       <key>
         <name>pk_pelicula</name>
-        <lookup>pk_clasificación</lookup>
+        <lookup>pk_clasificacion</lookup>
       </key>
       <date>
         <name/>
@@ -1087,7 +1087,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <to>date_to</to>
       </date>
       <return>
-        <name>pk_clasificación</name>
+        <name>pk_clasificacion</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
@@ -1118,7 +1118,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>pk_película</name>
+    <name>pk_pelicula</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1129,7 +1129,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim peliculas</table>
+    <table>dim_peliculas</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
@@ -1175,7 +1175,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>pk_película en actuación</name>
+    <name>pk_pelicula en actuacion</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1186,7 +1186,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim peliculas</table>
+    <table>dim_peliculas</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
@@ -1243,7 +1243,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim sucursal</table>
+    <table>dim_sucursales</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
