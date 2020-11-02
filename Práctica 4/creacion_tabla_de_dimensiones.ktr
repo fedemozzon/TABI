@@ -545,11 +545,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dimension_sucursales</from>
-      <to>elimina_campos_de_la_dimension_sucursales</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>dimension_peliculas</from>
       <to>elimina_campos_de_la_dimension_pelicula</to>
       <enabled>Y</enabled>
@@ -557,11 +552,6 @@
     <hop>
       <from>elimina_campos_de_la_dimension_pelicula</from>
       <to>pk_pelicula</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>elimina_campos_de_la_dimension_sucursales</from>
-      <to>pk_sucursal</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -602,6 +592,21 @@
     <hop>
       <from>Valor JavaScript modificado</from>
       <to>pk_fecha</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dimension_sucursales</from>
+      <to>Valor JavaScript modificado 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Valor JavaScript modificado 2</from>
+      <to>elimina_campos_de_la_dimension_sucursales</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>elimina_campos_de_la_dimension_sucursales</from>
+      <to>pk_sucursal</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -683,63 +688,6 @@ var anio = year(rental_date)
     <GUI>
       <xloc>400</xloc>
       <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza_pk_pelicula</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim_peliculas</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>film_id</name>
-        <lookup>film_id</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name>pk_pelicula</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -840,6 +788,63 @@ var anio = year(rental_date)
     </remotesteps>
     <GUI>
       <xloc>496</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_pk_pelicula</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dim_peliculas</table>
+    <connection>postgres dwh</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>film_id</name>
+        <lookup>film_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>pk_pelicula</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2375,18 +2380,27 @@ FROM "public".rental
     <fields>
       <field>
         <name>address_id</name>
+        <rename/>
       </field>
       <field>
         <name>address</name>
+        <rename/>
       </field>
       <field>
         <name>address2</name>
+        <rename/>
       </field>
       <field>
         <name>district</name>
+        <rename/>
       </field>
       <field>
         <name>store_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>nombre_sucursal</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2399,7 +2413,7 @@ FROM "public".rental
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>592</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2790,6 +2804,11 @@ FROM "public".rental
         <lookup>district</lookup>
         <update>Update</update>
       </field>
+      <field>
+        <name>nombre_sucursal</name>
+        <lookup>nombre_sucursal</lookup>
+        <update>Insert</update>
+      </field>
       <return>
         <name>pk_sucursal</name>
         <rename/>
@@ -2816,7 +2835,7 @@ FROM "public".rental
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
+      <xloc>816</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2924,6 +2943,51 @@ FROM "public".film_category
     <GUI>
       <xloc>144</xloc>
       <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Valor JavaScript modificado 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var nombre_sucursal = "Sucursal " + store_id 
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>nombre_sucursal</name>
+        <rename>nombre_sucursal</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
