@@ -561,11 +561,11 @@
     </hop>
     <hop>
       <from>pk_sucursal</from>
-      <to>pk_clasificacion</to>
+      <to>pk_lenguaje</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>pk_clasificacion</from>
+      <from>pk_lenguaje</from>
       <to>guardo_alquiler</to>
       <enabled>Y</enabled>
     </hop>
@@ -597,10 +597,10 @@
         <rename>gancias por alquiler</rename>
       </field>
       <field>
-        <name>rental_id</name>
+        <name>rental_date</name>
       </field>
       <field>
-        <name>rental_date</name>
+        <name>rental_id</name>
       </field>
       <field>
         <name>film_id</name>
@@ -609,7 +609,7 @@
         <name>store_id</name>
       </field>
       <field>
-        <name>last_update</name>
+        <name>language_id</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -751,10 +751,13 @@ FROM "public".film_actor</sql>
 , inventory.film_id
 , inventory.store_id
 , rental.last_update
+, film.language_id
 FROM "public".rental
 inner join "public".inventory on rental.inventory_id = inventory.inventory_id
 INNER join "public".payment  ON payment.rental_id = rental.rental_id
-GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
+inner join "public".film on inventory.film_id = film.film_id
+GROUP by inventory.film_id,rental.rental_id,  inventory.store_id,film.language_id
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -768,7 +771,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>rental_id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>rental_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -791,7 +794,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>sum</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>sum</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -814,7 +817,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>rental_date</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>rental_date</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -837,7 +840,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>film_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>film_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -860,7 +863,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>store_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>store_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -883,9 +886,32 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <name>last_update</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Creacion de tabla de Hechos Alquiler</origin>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
         <comments>last_update</comments>
         <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_AR</date_format_locale>
+        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>language_id</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>creacion_de_tabla_de_hechos_alquiler</origin>
+        <comments>language_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -916,50 +942,6 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>guardo_alquiler</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres dwh</connection>
-    <schema>public</schema>
-    <table>fact_alquiler</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>guardo_actuacion</name>
     <type>TableOutput</type>
     <description/>
@@ -972,12 +954,12 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </partitioning>
     <connection>postgres dwh</connection>
     <schema>public</schema>
-    <table>fact_actuacion</table>
+    <table>fact_actuaciones</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -985,9 +967,17 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     <tablename_in_field>N</tablename_in_field>
     <tablename_field/>
     <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <return_keys>Y</return_keys>
+    <return_field>pk_actuacion</return_field>
     <fields>
+      <field>
+        <column_name>pk_pelicula</column_name>
+        <stream_name>pk_pelicula</stream_name>
+      </field>
+      <field>
+        <column_name>pk_actor</column_name>
+        <stream_name>pk_actor</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1000,6 +990,70 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     <GUI>
       <xloc>816</xloc>
       <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>guardo_alquiler</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres dwh</connection>
+    <schema>public</schema>
+    <table>fact_alquileres</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>Y</return_keys>
+    <return_field>pk_alquiler</return_field>
+    <fields>
+      <field>
+        <column_name>gancias por alquiler</column_name>
+        <stream_name>gancias por alquiler</stream_name>
+      </field>
+      <field>
+        <column_name>fecha_de_alquiler</column_name>
+        <stream_name>rental_date</stream_name>
+      </field>
+      <field>
+        <column_name>pk_pelicula</column_name>
+        <stream_name>pk_pelicula</stream_name>
+      </field>
+      <field>
+        <column_name>pk_sucursal</column_name>
+        <stream_name>pk_sucursal</stream_name>
+      </field>
+      <field>
+        <column_name>pk_lenguaje</column_name>
+        <stream_name>pk_lenguaje</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1061,7 +1115,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
     </GUI>
   </step>
   <step>
-    <name>pk_clasificacion</name>
+    <name>pk_lenguaje</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1072,14 +1126,14 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim_clasificacion</table>
+    <table>dim_lenguajes</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>N</update>
     <fields>
       <key>
-        <name>pk_pelicula</name>
-        <lookup>pk_clasificacion</lookup>
+        <name>language_id</name>
+        <lookup>language_id</lookup>
       </key>
       <date>
         <name/>
@@ -1087,7 +1141,7 @@ GROUP by inventory.film_id,rental.rental_id,  inventory.store_id</sql>
         <to>date_to</to>
       </date>
       <return>
-        <name>pk_clasificacion</name>
+        <name>pk_lenguaje</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>

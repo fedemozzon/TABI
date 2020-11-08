@@ -540,8 +540,8 @@
   </connection>
   <order>
     <hop>
-      <from>dimension_clasificaciones</from>
-      <to>elimina_campos_de_la_dimension_clasificaciones</to>
+      <from>dimension_lenguaje</from>
+      <to>elimina_campos_de_la_dimension_lenguaje</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -555,8 +555,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>elimina_campos_de_la_dimension_clasificaciones</from>
-      <to>pk_clasificacion</to>
+      <from>elimina_campos_de_la_dimension_lenguaje</from>
+      <to>pk_lenguaje</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -586,21 +586,16 @@
     </hop>
     <hop>
       <from>dimension_tiempo</from>
-      <to>Valor JavaScript modificado</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Valor JavaScript modificado</from>
-      <to>pk_fecha</to>
+      <to>agrego_tiempos</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>dimension_sucursales</from>
-      <to>Valor JavaScript modificado 2</to>
+      <to>agrego_nombre_sucursal</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Valor JavaScript modificado 2</from>
+      <from>agrego_nombre_sucursal</from>
       <to>elimina_campos_de_la_dimension_sucursales</to>
       <enabled>Y</enabled>
     </hop>
@@ -609,9 +604,225 @@
       <to>pk_sucursal</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>agrego_tiempos</from>
+      <to>guardo_fecha</to>
+      <enabled>N</enabled>
+    </hop>
   </order>
   <step>
-    <name>Valor JavaScript modificado</name>
+    <name>actualiza_bridge_pelicula_categorias</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres dwh</connection>
+    <schema>public</schema>
+    <table>dim_bridge_pelicula_categorias</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>Y</return_keys>
+    <return_field>pk_bridge_categoria_pelicula</return_field>
+    <fields>
+      <field>
+        <column_name>pk_pelicula</column_name>
+        <stream_name>pk_pelicula</stream_name>
+      </field>
+      <field>
+        <column_name>pk_categoria</column_name>
+        <stream_name>pk_categoria</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_pk_categorias</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dim_categorias</table>
+    <connection>postgres dwh</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>category_id</name>
+        <lookup>category_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>pk_categoria</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>Y</use_start_date_alternative>
+    <start_date_alternative>sysdate</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>actualiza_pk_pelicula</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dim_peliculas</table>
+    <connection>postgres dwh</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>film_id</name>
+        <lookup>film_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>pk_pelicula</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>agrego_nombre_sucursal</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var nombre_sucursal = "Sucursal " + store_id 
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>nombre_sucursal</name>
+        <rename>nombre_sucursal</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>agrego_tiempos</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -688,164 +899,6 @@ var anio = year(rental_date)
     <GUI>
       <xloc>400</xloc>
       <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza_bridge_pelicula_categorias</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres dwh</connection>
-    <schema>public</schema>
-    <table>dim_bridge_pelicula_categorias</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza_pk_categorias</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim_categoria</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>category_id</name>
-        <lookup>category_id</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>last_update</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name>pk_categoria</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>actualiza_pk_pelicula</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim_peliculas</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>N</update>
-    <fields>
-      <key>
-        <name>film_id</name>
-        <lookup>film_id</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name>pk_pelicula</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1085,7 +1138,7 @@ FROM "public".category
     </GUI>
   </step>
   <step>
-    <name>dimension_clasificaciones</name>
+    <name>dimension_lenguaje</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1096,8 +1149,9 @@ FROM "public".category
       <schema_name/>
     </partitioning>
     <connection>postgres</connection>
-    <sql>SELECT *
-FROM "public".film
+    <sql>SELECT
+ *
+FROM "public"."language"
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1109,102 +1163,10 @@ FROM "public".film
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>film_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>film_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>title</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>title</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>description</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>description</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>release_year</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>release_year</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
         <name>language_id</name>
-        <length>4</length>
+        <length>9</length>
         <precision>0</precision>
-        <origin>Dimensión Clasificación</origin>
+        <origin>dimension_lenguaje</origin>
         <comments>language_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1222,105 +1184,13 @@ FROM "public".film
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>rental_duration</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>rental_duration</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>rental_rate</name>
-        <length>4</length>
-        <precision>2</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>rental_rate</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>length</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>length</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>replacement_cost</name>
-        <length>5</length>
-        <precision>2</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>replacement_cost</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>rating</name>
-        <length>2147483647</length>
+        <name>name</name>
+        <length>20</length>
         <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>rating</comments>
+        <origin>dimension_lenguaje</origin>
+        <comments>name</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1342,54 +1212,8 @@ FROM "public".film
         <name>last_update</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
+        <origin>dimension_lenguaje</origin>
         <comments>last_update</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>special_features</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>special_features</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_AR</date_format_locale>
-        <date_format_timezone>America/Argentina/Buenos_Aires</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>fulltext</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Dimensión Clasificación</origin>
-        <comments>fulltext</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2098,7 +1922,7 @@ FROM "public".rental
         <name>rental_id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>rental_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2121,7 +1945,7 @@ FROM "public".rental
         <name>rental_date</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>rental_date</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2144,7 +1968,7 @@ FROM "public".rental
         <name>inventory_id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>inventory_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2167,7 +1991,7 @@ FROM "public".rental
         <name>customer_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>customer_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2190,7 +2014,7 @@ FROM "public".rental
         <name>return_date</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>return_date</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2213,7 +2037,7 @@ FROM "public".rental
         <name>staff_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>staff_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2236,7 +2060,7 @@ FROM "public".rental
         <name>last_update</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Dimensión Tiempo</origin>
+        <origin>dimension_tiempo</origin>
         <comments>last_update</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2269,7 +2093,7 @@ FROM "public".rental
     </GUI>
   </step>
   <step>
-    <name>elimina_campos_de_la_dimension_clasificaciones</name>
+    <name>elimina_campos_de_la_dimension_lenguaje</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2280,40 +2104,14 @@ FROM "public".rental
       <schema_name/>
     </partitioning>
     <fields>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>title</name>
-      </remove>
-      <remove>
-        <name>description</name>
-      </remove>
-      <remove>
-        <name>release_year</name>
-      </remove>
-      <remove>
+      <field>
         <name>language_id</name>
-      </remove>
-      <remove>
-        <name>rental_duration</name>
-      </remove>
-      <remove>
-        <name>rental_rate</name>
-      </remove>
-      <remove>
-        <name>length</name>
-      </remove>
-      <remove>
-        <name>replacement_cost</name>
-      </remove>
-      <remove>
-        <name>last_update</name>
-      </remove>
-      <remove>
-        <name>special_features</name>
-      </remove>
-      <remove>
-        <name>fulltext</name>
-      </remove>
+      </field>
+      <field>
+        <name>name</name>
+        <rename>lenguaje</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2380,27 +2178,18 @@ FROM "public".rental
     <fields>
       <field>
         <name>address_id</name>
-        <rename/>
       </field>
       <field>
         <name>address</name>
-        <rename/>
-      </field>
-      <field>
-        <name>address2</name>
-        <rename/>
       </field>
       <field>
         <name>district</name>
-        <rename/>
       </field>
       <field>
         <name>store_id</name>
-        <rename/>
       </field>
       <field>
         <name>nombre_sucursal</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2446,12 +2235,12 @@ FROM "public".rental
       </date>
       <field>
         <name>first_name</name>
-        <lookup>nombre</lookup>
+        <lookup>actor_nombre</lookup>
         <update>Update</update>
       </field>
       <field>
         <name>last_name</name>
-        <lookup>apellido</lookup>
+        <lookup>actor_apellido</lookup>
         <update>Update</update>
       </field>
       <return>
@@ -2497,7 +2286,7 @@ FROM "public".rental
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim_categoria</table>
+    <table>dim_categorias</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -2513,12 +2302,7 @@ FROM "public".rental
       </date>
       <field>
         <name>name</name>
-        <lookup>nombre</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>last_update</name>
-        <lookup>last_update</lookup>
+        <lookup>categoria</lookup>
         <update>Update</update>
       </field>
       <return>
@@ -2553,7 +2337,7 @@ FROM "public".rental
     </GUI>
   </step>
   <step>
-    <name>pk_clasificacion</name>
+    <name>pk_lenguaje</name>
     <type>DimensionLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2564,14 +2348,14 @@ FROM "public".rental
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dim_clasificacion</table>
+    <table>dim_lenguajes</table>
     <connection>postgres dwh</connection>
     <commit>100</commit>
     <update>Y</update>
     <fields>
       <key>
-        <name>film_id</name>
-        <lookup>film_id</lookup>
+        <name>language_id</name>
+        <lookup>language_id</lookup>
       </key>
       <date>
         <name/>
@@ -2579,12 +2363,12 @@ FROM "public".rental
         <to>date_to</to>
       </date>
       <field>
-        <name>rating</name>
-        <lookup>clasificación</lookup>
+        <name>lenguaje</name>
+        <lookup>lenguaje</lookup>
         <update>Update</update>
       </field>
       <return>
-        <name>pk_clasificacion</name>
+        <name>pk_lenguaje</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
@@ -2611,88 +2395,6 @@ FROM "public".rental
     <GUI>
       <xloc>672</xloc>
       <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>pk_fecha</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dim_fecha</table>
-    <connection>postgres dwh</connection>
-    <commit>100</commit>
-    <update>Y</update>
-    <fields>
-      <key>
-        <name>rental_date</name>
-        <lookup>rental_date</lookup>
-      </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <field>
-        <name>semana</name>
-        <lookup>semana</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>mes</name>
-        <lookup>mes</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>trimestre</name>
-        <lookup>trimestre</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>semestre</name>
-        <lookup>semestre</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>anio</name>
-        <lookup>anio</lookup>
-        <update>Update</update>
-      </field>
-      <return>
-        <name>pk_fecha</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2724,12 +2426,12 @@ FROM "public".rental
       </date>
       <field>
         <name>title</name>
-        <lookup>título</lookup>
+        <lookup>pelicula_titulo</lookup>
         <update>Update</update>
       </field>
       <field>
         <name>description</name>
-        <lookup>descripción</lookup>
+        <lookup>pelicula_descripcion</lookup>
         <update>Update</update>
       </field>
       <return>
@@ -2791,23 +2493,18 @@ FROM "public".rental
       </date>
       <field>
         <name>address</name>
-        <lookup>dirección 1</lookup>
-        <update>Update</update>
-      </field>
-      <field>
-        <name>address2</name>
-        <lookup>dirección 2</lookup>
+        <lookup>dirección</lookup>
         <update>Update</update>
       </field>
       <field>
         <name>district</name>
-        <lookup>district</lookup>
+        <lookup>distrito</lookup>
         <update>Update</update>
       </field>
       <field>
         <name>nombre_sucursal</name>
         <lookup>nombre_sucursal</lookup>
-        <update>Insert</update>
+        <update>Update</update>
       </field>
       <return>
         <name>pk_sucursal</name>
@@ -2868,7 +2565,7 @@ FROM "public".film_category
         <name>film_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Tabla Bridge</origin>
+        <origin>tabla_bridge</origin>
         <comments>film_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2891,7 +2588,7 @@ FROM "public".film_category
         <name>category_id</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Tabla Bridge</origin>
+        <origin>tabla_bridge</origin>
         <comments>category_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2914,7 +2611,7 @@ FROM "public".film_category
         <name>last_update</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>Tabla Bridge</origin>
+        <origin>tabla_bridge</origin>
         <comments>last_update</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2947,8 +2644,8 @@ FROM "public".film_category
     </GUI>
   </step>
   <step>
-    <name>Valor JavaScript modificado 2</name>
-    <type>ScriptValueMod</type>
+    <name>guardo_fecha</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2957,24 +2654,47 @@ FROM "public".film_category
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var nombre_sucursal = "Sucursal " + store_id 
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
+    <connection>postgres dwh</connection>
+    <schema>public</schema>
+    <table>dim_fechas</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>nombre_sucursal</name>
-        <rename>nombre_sucursal</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
+        <column_name>fecha</column_name>
+        <stream_name>rental_date</stream_name>
+      </field>
+      <field>
+        <column_name>semana</column_name>
+        <stream_name>semana</stream_name>
+      </field>
+      <field>
+        <column_name>mes</column_name>
+        <stream_name>mes</stream_name>
+      </field>
+      <field>
+        <column_name>trimestre</column_name>
+        <stream_name>trimestre</stream_name>
+      </field>
+      <field>
+        <column_name>semestre</column_name>
+        <stream_name>semestre</stream_name>
+      </field>
+      <field>
+        <column_name>anio</column_name>
+        <stream_name>anio</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -2986,8 +2706,8 @@ FROM "public".film_category
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>160</yloc>
+      <xloc>672</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

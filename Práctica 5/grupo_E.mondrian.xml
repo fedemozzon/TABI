@@ -1,0 +1,55 @@
+<Schema name="Grupo_E">
+  <Dimension visible="true" name="Pelicula">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_pelicula">
+      <Table name="dim_peliculas"></Table>
+      <level name="Titulo" column="pelicula_titulo"/>
+      <level name="Descripción" column="pelicula_descripcion"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension visible="true" name="Tiempo">
+    <Hierarchy visible="true" hasAll="true" primaryKey="fecha">
+      <Table name="dim_fechas"></Table>
+      <level name="Año" column="anio"/>
+      <level name="Mes" column="mes"/>
+      <level name="Semana" column="semana"/>
+      <level name="Trimestre" column="trimestre"/>
+      <level name="Semestre" column="semestre"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension visible="true" name="Sucursal">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_sucursal">
+      <Table name="dim_sucursales"></Table>
+      <level name="Sucursal" column="nombre_sucursal"/>
+      <level name="Distrito" column="distrito"/>
+      <level name="Dirección" column="dirección"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension visible="true" name="Lenguaje">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_lenguaje">
+      <Table name="dim_lenguajes"></Table>
+      <level name="Lenguaje" column="lenguaje"/>
+    </Hierarchy>
+  </Dimension>
+  <Dimension visible="true" name="Actor">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_actor">
+      <Table name="dim_actores"></Table>
+      <level name="Nombre" column="actor_nombre"/>
+      <level name="Apellido" column="actor_apellido"/>
+    </Hierarchy>
+  </Dimension>
+  <cube name="Actuación">
+    <Table name="fact_actuaciones"></Table>
+      <dimensionUsage name="Pelicula" source="Pelicula" foreignKey="pk_pelicula"/>
+      <dimensionUsage name="Actor" source="Actor" foreignKey="pk_actor"/>
+      <Measure name="#actores_en_una_pelicula" column="pk_actor" aggregator="distinct count" dataType="Integer"/>
+  </cube>
+  <cube name="Alquileres">
+    <Table name="fact_alquileres"></Table>
+    <dimensionUsage name="Pelicula" source="Pelicula" foreignKey="pk_pelicula"/>
+    <dimensionUsage name="Tiempo" source="Tiempo" foreignKey="fecha_de_alquiler"/>
+    <dimensionUsage name="Sucursal" source="Sucursal" foreignKey="pk_sucursal"/>
+    <dimensionUsage name="Lenguaje" source="Lenguaje" foreignKey="pk_lenguaje"/>
+    <Measure name="#aliquileres" column="pk_alquiler" aggregator="distinct count" dataType="Integer"/>
+    <Measure name="Monto" column="gancias por alquiler" aggregator="sum" dataType="Numeric"/>
+  </cube>
+</Schema>
