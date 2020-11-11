@@ -1,9 +1,17 @@
 <Schema name="Grupo_E">
   <Dimension visible="true" name="Pelicula">
-    <Hierarchy visible="true" hasAll="true" primaryKey="pk_pelicula">
-      <Table name="dim_peliculas"></Table>
-      <level name="Titulo" column="pelicula_titulo"/>
-      <level name="Descripción" column="pelicula_descripcion"/>
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_pelicula" primaryKeyTable="dim_peliculas">
+    <Join leftKey="pk_pelicula" rightKey="pk_pelicula" >
+      <Table name="dim_peliculas">
+      </Table>
+      <Join leftKey="pk_categoria" rightKey="pk_categoria">
+        <Table name="dim_categorias"/>
+        <Table name="dim_bridge_pelicula_categorias" />
+      </Join>
+    </Join>
+      <level name="Titulo" column="pelicula_titulo" table="dim_peliculas" />
+      <level name="Descripción" column="pelicula_descripcion" table="dim_peliculas"/>
+      <level name="Categoria" column="categoria" table="dim_categorias"/>
     </Hierarchy>
   </Dimension>
   <Dimension visible="true" name="Tiempo">
