@@ -24,6 +24,12 @@
       <level name="Semestre" column="semestre"/>
     </Hierarchy>
   </Dimension>
+    <Dimension visible="true" name="Categorias">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_pelicula">
+      <Table name="categorias_view"></Table>
+      <level name="Categoria" column="categoria"/>
+    </Hierarchy>
+  </Dimension>
   <Dimension visible="true" name="Sucursal">
     <Hierarchy visible="true" hasAll="true" primaryKey="pk_sucursal">
       <Table name="dim_sucursales"></Table>
@@ -57,6 +63,7 @@
     <dimensionUsage name="Tiempo" source="Tiempo" foreignKey="fecha_de_alquiler"/>
     <dimensionUsage name="Sucursal" source="Sucursal" foreignKey="pk_sucursal"/>
     <dimensionUsage name="Lenguaje" source="Lenguaje" foreignKey="pk_lenguaje"/>
+    <dimensionUsage name="Categorias" source="Categorias" foreignKey="pk_pelicula"/>
     <Measure name="#aliquileres" column="pk_alquiler" aggregator="distinct count" dataType="Integer"/>
     <Measure name="Monto" column="gancias por alquiler" aggregator="sum" dataType="Numeric"/>
   </cube>
