@@ -1,0 +1,434 @@
+Algeria,Africa,17.4
+Algeria,Africa,21.7
+Algeria,Africa,28.3
+Angola,Africa,25.8
+Benin,Africa,27.2
+Benin,Africa,26.8
+Benin,Africa,27.7
+Botswana,Africa,22.4
+Botswana,Africa,21
+Botswana,Africa,21.4
+Burkina Faso,Africa,28.3
+Burkina Faso,Africa,28.6
+Burundi,Africa,23.8
+Cameroon,Africa,28.3
+Cameroon,Africa,22.0
+Cameroon,Africa,26.7
+Cameroon,Africa,23.8
+Cape Verde,Africa,24.4
+Central African Republic,Africa,26.0
+Central African Republic,Africa,26.5
+Chad,Africa,28.3
+Chad,Africa,29.4
+Democratic Republic of the Congo,Africa,25.3
+Democratic Republic of the Congo,Africa,20.8
+Djibouti,Africa,29.9
+Egypt,Africa,21.4
+Egypt,Africa,20.0
+Equatorial Guinea,Africa,25.1
+Equatorial Guinea,Africa,26.3
+Eritrea,Africa,15.6
+Eritrea,Africa,30.5
+Ethiopia,Africa,22.7
+Ethiopia,Africa,16
+Gabon,Africa,25.9
+Gabon,Africa,26.0
+The Gambia,Africa,26
+Ghana,Africa,26.4
+Ghana,Africa,27.9
+Ghana,Africa,26
+Guinea,Africa,26.4
+Guinea,Africa,26.5
+Guinea-Bissau,Africa,27
+Ivory Coast,Africa,26
+Ivory Coast,Africa,26
+Ivory Coast,Africa,26
+Ivory Coast,Africa,26
+Kenya,Africa,26.3
+Kenya,Africa,17.8
+Kenya,Africa,29.3
+Kenya,Africa,29.3
+Libya,Africa,20
+Libya,Africa,19.9
+Madagascar,Africa,17.9
+Madagascar,Africa,23.4
+Madagascar,Africa,17.9
+Madagascar,Africa,25.2
+Madagascar,Africa,26.3
+Madagascar,Africa,24.1
+Malawi,Africa,24.4
+Malawi,Africa,22.2
+Malawi,Africa,17.7
+Mali,Africa,28
+Mali,Africa,28
+Mali,Africa,27.8
+Mauritania,Africa,21.3
+Mauritania,Africa,25.7
+Morocco,Africa,17.2
+Morocco,Africa,19.6
+Morocco,Africa,18.9
+Mozambique,Africa,22.8
+Niger,Africa,29.3
+Nigeria,Africa,26.8
+Nigeria,Africa,26.0
+Nigeria,Africa,27.4
+Nigeria,Africa,26.4
+Nigeria,Africa,28
+Republic of the Congo,Africa,25
+Republic of the Congo,Africa,26.1
+Republic of the Congo,Africa,24
+Senegal,Africa,24
+Senegal,Africa,24
+Somalia,Africa,30.0
+Somalia,Africa,21.7
+Somalia,Africa,27.1
+South Africa,Africa,18.2
+South Africa,Africa,16.2
+South Africa,Africa,15.5
+South Africa,Africa,15.6
+South Africa,Africa,20.4
+South Africa,Africa,20.6
+South Sudan,Africa,27.8
+South Sudan,Africa,27.8
+Sudan,Africa,28.4
+Sudan,Africa,29.9
+Tanzania,Africa,25.8
+Tanzania,Africa,26
+Tanzania,Africa,23
+Tanzania,Africa,22.7
+Togo,Africa,26.9
+Togo,Africa,28.1
+Tunisia,Africa,18.4
+Tunisia,Africa,19.5
+Uganda,Africa,20
+Uganda,Africa,21
+Zambia,Africa,20.3
+Zambia,Africa,19.9
+Zambia,Africa,21.8
+Zimbabwe,Africa,18.4
+Zimbabwe,Africa,18.9
+Afghanistan,Asia,12.1
+Azerbaijan,Asia,15.1
+Armenia,Asia,12.4
+Bahrain,Asia,26.5
+Bangladesh,Asia,25.9
+Cambodia,Asia,28.3
+China,Asia,12.9
+China,Asia,17.4
+China,Asia,18.6
+China,Asia,22.4
+China,Asia,7.6
+China,Asia,16.7
+China,Asia,7.4
+East Timor,Asia,26.6
+Georgia (country),Asia,14
+Georgia (country),Asia,12.9
+Hong Kong,Asia,23.3
+India,Asia,25
+India,Asia,26.7
+India,Asia,27.1
+Indonesia,Asia,26.7
+Iraq,Asia,22.77
+Iraq,Asia,19.5
+Iran,Asia,17
+Iran,Asia,25.4
+Iran,Asia,12.6
+Israel,Asia,20
+Japan,Asia,8.9
+Japan,Asia,15.4
+Japan,Asia,23.1
+Kazakhstan,Asia,10.0
+Kazakhstan,Asia,3.5
+North Korea,Asia,10.8
+South Korea,Asia,12.5
+Kuwait,Asia,25.7
+Kyrgyzstan,Asia,11.3
+Laos,Asia,25.9
+Lebanon,Asia,20.9
+Malaysia,Asia,27.3
+Maldives,Asia,28.0
+Mongolia,Asia,−0.4
+Myanmar,Asia,28.0
+Myanmar,Asia,27.5
+Nepal,Asia,18.3
+Oman,Asia,28
+Pakistan,Asia,26.0
+Pakistan,Asia,24.3
+Philippines,Asia,28.4
+Russia,Asia,−11.1
+Russia,Asia,1.0
+Russia,Asia,1.7
+Russia,Asia,1.9
+Russia,Asia,4.9
+Russia,Asia,−8.8
+Saudi Arabia,Asia,18
+Saudi Arabia,Asia,26
+Singapore,Asia,27
+Sri Lanka,Asia,27.4
+Syria,Asia,17.0
+Tajikistan,Asia,14.7
+Taiwan,Asia,23.0
+Thailand,Asia,28.6
+Thailand,Asia,25.8
+Thailand,Asia,27.0
+Thailand,Asia,27.3
+Turkey,Asia,12.0
+Turkey,Asia,5.1
+Turkey,Asia,17.9
+Turkmenistan,Asia,17.1
+United Arab Emirates,Asia,26.9
+Uzbekistan,Asia,14.8
+Vietnam,Asia,17.9
+Vietnam,Asia,25.8
+Vietnam,Asia,23.6
+Vietnam,Asia,27.4
+Yemen,Asia,29.1
+Yemen,Asia,20
+Albania,Europa,15.2
+Andorra,Europa,9.8
+Austria,Europa,10.4
+Belarus,Europa,6.7
+Belgium,Europa,10.5
+Bosnia and Herzegovina,Europa,10.1
+Bulgaria,Europa,10.6
+Croatia,Europa,10.7
+Croatia,Europa,16.1
+Cyprus,Europa,19.7
+Czech Republic,Europa,8.4
+Denmark,Europa,9.1
+Estonia,Europa,5.9
+Finland,Europa,5.9
+Finland,Europa,3.4
+Finland,Europa,2.7
+France,Europa,15.8
+France,Europa,12.3
+Germany,Europa,10.3
+Germany,Europa,10.6
+Greece,Europa,19.2
+Greece,Europa,19.4
+Hungary,Europa,11.3
+Iceland,Europa,4.3
+Ireland,Europa,9.8
+Italy,Europa,13.0
+Italy,Europa,18.5
+Italy,Europa,15.2
+Italy,Europa,15.9
+Latvia,Europa,6.2
+Liechtenstein,Europa,10.1
+Lithuania,Europa,6.0
+Luxembourg,Europa,9.3
+North Macedonia,Europa,12.4
+Malta,Europa,18.8
+Moldova,Europa,10.2
+Monaco,Europa,16.4
+Montenegro,Europa,15.3
+Netherlands,Europa,10.2
+Norway,Europa,7.7
+Norway,Europa,5.7
+Norway,Europa,2.9
+Poland,Europa,8.5
+Portugal,Europa,17.5
+Romania,Europa,10.8
+Russia,Europa,1.3
+Russia,Europa,5.8
+Russia,Europa,0.6
+Russia,Europa,9.9
+Russia,Europa,5.8
+Russia,Europa,14.2
+San Marino,Europa,11.8
+Serbia,Europa,12.5
+Slovakia,Europa,10.5
+Slovenia,Europa,10.9
+Spain,Europa,18.2
+Spain,Europa,21.2
+Spain,Europa,15.0
+Spain,Europa,19.2
+Spain,Europa,18.3
+Sweden,Europa,6.6
+Switzerland,Europa,9.3
+Turkey,Europa,13.9
+Ukraine,Europa,8.4
+Ukraine,Europa,7.8
+Ukraine,Europa,10.7
+United Kingdom,Europa,9.3
+United Kingdom,Europa,10.3
+Antigua and Barbuda,Centro América y América del Norte,26.9
+Aruba,Centro América y América del Norte,28.1
+The Bahamas,Centro América y América del Norte,24.6
+Barbados,Centro América y América del Norte,27.0
+Belize,Centro América y América del Norte,26.7
+Bermuda,Centro América y América del Norte,22.3
+Canada,Centro América y América del Norte,4.4
+Canada,Centro América y América del Norte,4.2
+Canada,Centro América y América del Norte,−14.4
+Canada,Centro América y América del Norte,7.5
+Canada,Centro América y América del Norte,−9.3
+Canada,Centro América y América del Norte,6.1
+Canada,Centro América y América del Norte,6.8
+Canada,Centro América y América del Norte,6.6
+Canada,Centro América y América del Norte,3.3
+Canada,Centro América y América del Norte,5.0
+Canada,Centro América y América del Norte,9.4
+Canada,Centro América y América del Norte,10.4
+Canada,Centro América y América del Norte,3.0
+Canada,Centro América y América del Norte,−0.1
+Canada,Centro América y América del Norte,−4.3
+Cayman Islands,Centro América y América del Norte,27.9
+Costa Rica,Centro América y América del Norte,22.6
+Cuba,Centro América y América del Norte,25.2
+Curaçao,Centro América y América del Norte,28.0
+Dominica,Centro América y América del Norte,26.2
+Dominican Republic,Centro América y América del Norte,25.9
+Greenland,Centro América y América del Norte,−1.4
+Honduras,Centro América y América del Norte,26.2
+Honduras,Centro América y América del Norte,21.7
+Jamaica,Centro América y América del Norte,27.4
+Mexico,Centro América y América del Norte,23.9
+Mexico,Centro América y América del Norte,18.6
+Mexico,Centro América y América del Norte,20.9
+Mexico,Centro América y América del Norte,23.7
+Mexico,Centro América y América del Norte,23.1
+Mexico,Centro América y América del Norte,17.5
+Mexico,Centro América y América del Norte,22.3
+Mexico,Centro América y América del Norte,17.8
+Mexico,Centro América y América del Norte,12.4
+Mexico,Centro América y América del Norte,25.4
+Mexico,Centro América y América del Norte,27.1
+Nicaragua,Centro América y América del Norte,27.3
+Panama,Centro América y América del Norte,28
+El Salvador,Centro América y América del Norte,23.1
+Puerto Rico,Centro América y América del Norte,27.2
+Saint Pierre and Miquelon,Centro América y América del Norte,5.7
+United States,Centro América y América del Norte,14.0
+United States,Centro América y América del Norte,2.8
+United States,Centro América y América del Norte,17.0
+United States,Centro América y América del Norte,20.7
+United States,Centro América y América del Norte,13.1
+United States,Centro América y América del Norte,11.4
+United States,Centro América y América del Norte,10.9
+United States,Centro América y América del Norte,16.1
+United States,Centro América y América del Norte,9.8
+United States,Centro América y América del Norte,11.7
+United States,Centro América y América del Norte,19.0
+United States,Centro América y América del Norte,10.4
+United States,Centro América y América del Norte,10.0
+United States,Centro América y América del Norte,18.1
+United States,Centro América y América del Norte,−2.3
+United States,Centro América y América del Norte,17.9
+United States,Centro América y América del Norte,20.8
+United States,Centro América y América del Norte,11.8
+United States,Centro América y América del Norte,20.3
+United States,Centro América y América del Norte,12.5
+United States,Centro América y América del Norte,20.3
+United States,Centro América y América del Norte,23.7
+United States,Centro América y América del Norte,18.6
+United States,Centro América y América del Norte,13.9
+United States,Centro América y América del Norte,17.2
+United States,Centro América y América del Norte,24.9
+United States,Centro América y América del Norte,8.9
+United States,Centro América y América del Norte,7.8
+United States,Centro América y América del Norte,15.4
+United States,Centro América y América del Norte,20.7
+United States,Centro América y América del Norte,12.9
+United States,Centro América y América del Norte,15.9
+United States,Centro América y América del Norte,10.6
+United States,Centro América y América del Norte,24.5
+United States,Centro América y América del Norte,13.2
+United States,Centro América y América del Norte,23.9
+United States,Centro América y América del Norte,10.8
+United States,Centro América y América del Norte,12.4
+United States,Centro América y América del Norte,16.3
+United States,Centro América y América del Norte,11.6
+United States,Centro América y América del Norte,20.8
+United States,Centro América y América del Norte,17.8
+United States,Centro América y América del Norte,14.6
+United States,Centro América y América del Norte,16.4
+United States,Centro América y América del Norte,11.3
+United States,Centro América y América del Norte,13.9
+United States,Centro América y América del Norte,22.9
+United States,Centro América y América del Norte,20.9
+United States,Centro América y América del Norte,15.8
+United States,Centro América y América del Norte,14.6
+United States,Centro América y América del Norte,13.9
+Australia,Sudamérica,17.3
+Australia,Sudamérica,21
+Australia,Sudamérica,21.4
+Australia,Sudamérica,25
+Australia,Sudamérica,13.1
+Australia,Sudamérica,26.4
+Australia,Sudamérica,27.6
+Australia,Sudamérica,12.7
+Australia,Sudamérica,15.1
+Australia,Sudamérica,18.7
+Australia,Sudamérica,17.7
+Chile,Sudamérica,20.5
+Fiji,Sudamérica,25.6
+New Zealand,Sudamérica,15.2
+New Zealand,Sudamérica,12.2
+New Zealand,Sudamérica,11.1
+New Zealand,Sudamérica,13.8
+New Zealand,Sudamérica,8.7
+New Zealand,Sudamérica,14.6
+New Zealand,Sudamérica,13.2
+New Zealand,Sudamérica,14.8
+New Zealand,Sudamérica,12.9
+Papua New Guinea,Sudamérica,26.9
+Solomon Islands,Sudamérica,26.5
+United States,Sudamérica,25.4
+Vanuatu,Sudamérica,24.3
+Argentina,Oceanía,15.3
+Argentina,Oceanía,8.3
+Argentina,Oceanía,17.9
+Argentina,Oceanía,13.0
+Argentina,Oceanía,18.2
+Argentina,Oceanía,13.9
+Argentina,Oceanía,17.1
+Argentina,Oceanía,14.7
+Argentina,Oceanía,21.1
+Argentina,Oceanía,7.8
+Argentina,Oceanía,17.5
+Argentina,Oceanía,16.7
+Argentina,Oceanía,17.9
+Argentina,Oceanía,19.5
+Argentina,Oceanía,20.4
+Argentina,Oceanía,5.7
+Argentina,Oceanía,14.2
+Bolivia,Oceanía,8.8
+Bolivia,Oceanía,24.8
+Bolivia,Oceanía,15.6
+Brazil,Oceanía,25.9
+Brazil,Oceanía,21.1
+Brazil,Oceanía,20.6
+Brazil,Oceanía,14.2
+Brazil,Oceanía,16.8
+Brazil,Oceanía,20.9
+Brazil,Oceanía,26.6
+Brazil,Oceanía,23.2
+Brazil,Oceanía,26.7
+Brazil,Oceanía,19.5
+Brazil,Oceanía,25.5
+Brazil,Oceanía,23.8
+Brazil,Oceanía,25.3
+Brazil,Oceanía,13.3
+Brazil,Oceanía,19.2
+Brazil,Oceanía,24.8
+Chile,Oceanía,16.7
+Chile,Oceanía,12.4
+Chile,Oceanía,13.6
+Chile,Oceanía,6.1
+Chile,Oceanía,14.7
+Colombia,Oceanía,14.4
+Colombia,Oceanía,27.4
+Colombia,Oceanía,22.5
+Ecuador,Oceanía,26.5
+Ecuador,Oceanía,14.4
+Falkland Islands,Oceanía,5.6
+French Guiana,Oceanía,26.7
+Guyana,Oceanía,26.8
+Paraguay,Oceanía,22.7
+Peru,Oceanía,12.5
+Peru,Oceanía,19.2
+Peru,Oceanía,24.5
+Suriname,Oceanía,26.8
+Uruguay,Oceanía,16.7
+Venezuela,Oceanía,22.0
